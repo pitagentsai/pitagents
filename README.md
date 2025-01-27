@@ -4,231 +4,179 @@
 ![GitHub stars](https://img.shields.io/github/stars/pitagentsai/pitagents?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/pitagentai?style=social)
 
-A professional and scalable Flask-based Agent AI Framework leveraging PIT (Programmable Intelligent Tokens) for advanced blockchain-like token management. This framework is engineered to efficiently create and manage intelligent agents, securely handle programmable token transactions, and maintain data integrity through a robust blockchain mechanism.
+Welcome to the **PITAGENT Framework** — a powerful system for creating and managing **Programmable Intelligent Tokens (PITs)** on a blockchain! 🌐
 
-**With PIT, tokens can carry programmable logic, enabling more flexible and intelligent interactions within the agent ecosystem.**
+This framework allows developers to build and manage programmable tokens that contain specific logic, allowing for flexible and customizable interactions within decentralized applications (dApps) and ecosystems. PIT tokens can be used in a variety of use cases, from finance to gaming, offering secure and intelligent token management.
 
-## 🛠️ Features
+## Features ✨
+- **Agent Management**: Easily create and manage agents (users) with their associated tokens.
+- **Programmable Tokens**: Tokens can carry conditions such as time-locks, amounts, or custom logic that must be met before they can be transferred or used.
+- **Blockchain Integration**: Interaction with the blockchain (Solana, Ethereum, etc.) for secure and tamper-proof token storage and transactions.
+- **Token Conditions**: Programmable logic that defines how tokens can be transferred or used.
+- **RESTful API**: Comprehensive API to create agents, mint tokens, transfer tokens, and validate conditions.
 
-- **✨ Agent Management**: Easily create and manage agents.
-- **🔑 Token Management**: Add, retrieve, and manage tokens associated with agents.
-- **🔗 Blockchain Validation**: Ensure the integrity of token transactions using a simple blockchain mechanism.
-- **📦 Extensible Structure**: Organized codebase for easy maintenance and scalability.
-- **📊 RESTful API**: Comprehensive API endpoints for seamless integration.
-- **📚 SQLAlchemy ORM**: Robust database interactions with SQLite for development.
+## Technologies Used 🛠️
+- **Flask**: Lightweight web framework for Python.
+- **SQLAlchemy**: ORM (Object-Relational Mapper) for working with databases.
+- **Solana** (or **Ethereum**): Blockchain for token management (Solana in this example).
+- **Python 3.8+**: Programming language for backend logic.
 
-## 🧩 Technologies Used
+## Quick Start 🚀
 
-- **[Flask](https://flask.palletsprojects.com/)**: Web framework for Python.
-- **[Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/)**: ORM for database interactions.
-- **[SQLite](https://www.sqlite.org/index.html)**: Lightweight database for development purposes.
-- **[Python 3.8+](https://www.python.org/)**: Programming language.
+### Prerequisites 📋
+- Python 3.8+ installed.
+- Flask and other Python libraries.
 
-## 📦 Installation
+### Installation 🛠️
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/pitagents.git
+   cd pitagents
+   ```
+   
+2. Create a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
 
-### 1. Clone the Repository
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-git clone https://github.com/pitagentsai/pitagents.git
-cd pitagents
-```
+4. Run the application:
+   ```bash
+   python app.py
+   ```
+   The Flask server will start at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
 
-### 2. Create a Virtual Environment
+## Usage 📚
 
-```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-```
+You can interact with the API using tools like **curl**, **Postman**, or any HTTP client of your choice. Below are examples of the API endpoints:
 
-### 3. Install Dependencies
+### API Endpoints 📡
 
-```bash
-pip install -r requirements.txt
-```
+#### 1. **Create an Agent**
+- **Endpoint**: `/api/agents/create`
+- **Method**: `POST`
+- **Body**:
+   ```json
+   {
+     "agent_id": "agent_1"
+   }
+   ```
+- **Response**:
+   ```json
+   {
+     "message": "Agent agent_1 created successfully."
+   }
+   ```
 
-### 4. Run the Application
+#### 2. **Mint a Token for an Agent**
+- **Endpoint**: `/api/tokens/mint`
+- **Method**: `POST`
+- **Body**:
+   ```json
+   {
+     "agent_id": "agent_1",
+     "token_data": {
+       "amount": 100,
+       "purpose": "Utility token",
+       "condition": "time_lock"
+     }
+   }
+   ```
+- **Response**:
+   ```json
+   {
+     "message": "Token minted successfully",
+     "token": {
+       "token_id": "TKN_1627568937",
+       "amount": 100,
+       "purpose": "Utility token",
+       "condition": "time_lock"
+     }
+   }
+   ```
 
-```bash
-python app.py
-```
+#### 3. **Transfer a Token**
+- **Endpoint**: `/api/tokens/transfer`
+- **Method**: `POST`
+- **Body**:
+   ```json
+   {
+     "from_agent_id": "agent_1",
+     "to_agent_id": "agent_2",
+     "amount": 50
+   }
+   ```
+- **Response**:
+   ```json
+   {
+     "message": "Token transferred successfully",
+     "transfer": {
+       "from": "agent_1",
+       "to": "agent_2",
+       "amount": 50
+     }
+   }
+   ```
 
-The application will be available at `http://127.0.0.1:5000/`.
+#### 4. **Validate Token Conditions**
+- **Endpoint**: `/api/tokens/validate`
+- **Method**: `POST`
+- **Body**:
+   ```json
+   {
+     "token_id": "TKN_1627568937"
+   }
+   ```
+- **Response**:
+   ```json
+   {
+     "is_valid": true
+   }
+   ```
 
-## 📚 Usage
-
-Interact with the API using tools like `curl`, [Postman](https://www.postman.com/), or any HTTP client of your choice.
-
-### 🧑‍🤝‍🧑 Agent Endpoints
-
-- **Create Agent**
-
-  ```http
-  POST /api/agents/create
-  ```
-
-  **Body:**
-
-  ```json
-  {
-    "agent_id": "agent_1"
-  }
-  ```
-
-- **Get All Agents**
-
-  ```http
-  GET /api/agents/
-  ```
-
-- **Get Agent Tokens**
-
-  ```http
-  GET /api/agents/<agent_id>/tokens
-  ```
-
-### 🔗 Blockchain Endpoints
-
-- **Add Token to Agent**
-
-  ```http
-  POST /api/blockchain/add_token
-  ```
-
-  **Body:**
-
-  ```json
-  {
-    "agent_id": "agent_1",
-    "token_data": "sample_token_data"
-  }
-  ```
-
-- **Validate Blockchain**
-
-  ```http
-  GET /api/blockchain/validate
-  ```
-
-## 📝 API Examples
-
-### 1. **Create an Agent**
-
-```bash
-curl -X POST http://127.0.0.1:5000/api/agents/create \
--H "Content-Type: application/json" \
--d '{"agent_id": "agent_1"}'
-```
-
-**Response:**
-
-```json
-{
-  "message": "Agent agent_1 created successfully."
-}
-```
-
-### 2. **Add a Token**
-
-```bash
-curl -X POST http://127.0.0.1:5000/api/blockchain/add_token \
--H "Content-Type: application/json" \
--d '{"agent_id": "agent_1", "token_data": "token123"}'
-```
-
-**Response:**
-
-```json
-{
-  "message": "Token added successfully.",
-  "block": {
-    "agent_id": "agent_1",
-    "token_data": "token123",
-    "previous_hash": null,
-    "hash": "e3b0c44298fc1c149afbf4c8996fb924..."
-  }
-}
-```
-
-### 3. **Get Tokens for an Agent**
+## Project Structure 📂
 
 ```bash
-curl http://127.0.0.1:5000/api/agents/agent_1/tokens
+PIT_Framework/
+├── app.py               # Main Flask API to interact with the framework
+├── pit_token_logic.py   # Logic for minting, transferring tokens and applying conditions
+├── solana_service.py    # Interactions with the Solana blockchain
+├── models.py            # SQLAlchemy models for Agents and PIT Tokens
+├── requirements.txt     # List of project dependencies
+└── README.md            # Project documentation (you're here)
 ```
 
-**Response:**
+## Contributing 🤝
+We welcome contributions! Feel free to fork the project, make changes, and submit a pull request. Here's how you can contribute:
+1. **Fork the repo**
+2. **Create a new branch** for your feature or fix:  
+   `git checkout -b feature/YourFeature`
+3. **Commit your changes**:  
+   `git commit -m 'Add new feature'`
+4. **Push your branch**:  
+   `git push origin feature/YourFeature`
+5. **Create a Pull Request**: Open a PR on GitHub.
 
-```json
-{
-  "tokens": [
-    "token123"
-  ]
-}
-```
+## License 📄
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
-### 4. **Validate the Blockchain**
-
-```bash
-curl http://127.0.0.1:5000/api/blockchain/validate
-```
-
-**Response:**
-
-```json
-{
-  "is_valid": true
-}
-```
-
-## 📂 Project Structure
-
-```
-agent-framework/
-├── app.py
-├── config.py
-├── requirements.txt
-├── README.md
-├── models/
-│   ├── __init__.py
-│   ├── agent.py
-│   └── block.py
-├── services/
-│   ├── __init__.py
-│   ├── agent_service.py
-│   └── blockchain_service.py
-├── routes/
-│   ├── __init__.py
-│   ├── agent_routes.py
-│   └── blockchain_routes.py
-└── utils/
-    ├── __init__.py
-    └── hash_utils.py
-```
-
-## 🧑‍💻 Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/YourFeature`)
-3. Commit your Changes (`git commit -m 'Add some feature'`)
-4. Push to the Branch (`git push origin feature/YourFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## 📞 Contact
-
-- **Twitter**: [@pitagentsai](https://x.com/pitagentai)
-- **GitHub**: [@pitagentsai](https://github.com/pitagentsai)
-
-## 🎉 Acknowledgements
-
-- Inspired by the need for scalable agent and token management systems.
-- Built with love using Flask and SQLAlchemy.
+## Contact 📧
+- Email: [pitagentsdev@gmail.com](mailto:pitagentsdev@gmail.com)
+- Twitter: [@pitagentsai](https://twitter.com/pitagentsai)
+- GitHub: [@pitagentsai](https://github.com/pitagentsai)
 
 ---
 
-✨ *Happy Coding!* ✨
-```
+## Acknowledgements 🎉
+- Inspired by the need for scalable and programmable token systems.
+- Built with love using **Flask**, **Solana**, and **SQLAlchemy**.
+- Special thanks to the blockchain community for their constant innovation.
+
+---
+
+Happy coding! ✨
