@@ -1,10 +1,12 @@
-# 🚀 Agent Framework
+# 🚀 PIT Agent Framework
 
 ![PyPI Version](https://img.shields.io/pypi/v/pitagentsai)
 ![GitHub stars](https://img.shields.io/github/stars/pitagentsai/pitagents?style=social)
-![Twitter Follow](https://img.shields.io/twitter/follow/yourtwitterhandle?style=social)
+![Twitter Follow](https://img.shields.io/twitter/follow/pitagentai?style=social)
 
-A professional and scalable **Flask-based Agent Framework** with blockchain-like token management. This framework is designed to efficiently create and manage agents, handle token transactions securely, and ensure data integrity through a simple blockchain mechanism.
+A professional and scalable Flask-based Agent AI Framework leveraging PIT (Programmable Intelligent Tokens) for advanced blockchain-like token management. This framework is engineered to efficiently create and manage intelligent agents, securely handle programmable token transactions, and maintain data integrity through a robust blockchain mechanism.
+
+**With PIT, tokens can carry programmable logic, enabling more flexible and intelligent interactions within the agent ecosystem.**
 
 ## 🛠️ Features
 
@@ -27,8 +29,8 @@ A professional and scalable **Flask-based Agent Framework** with blockchain-like
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/agent-framework.git
-cd agent-framework
+git clone https://github.com/pitagentsai/pitagents.git
+cd pitagents
 ```
 
 ### 2. Create a Virtual Environment
@@ -218,8 +220,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 📞 Contact
 
-- **Twitter**: [@yourtwitterhandle](https://twitter.com/yourtwitterhandle)
-- **GitHub**: [yourusername](https://github.com/yourusername)
+- **Twitter**: [@pitagentsai](https://x.com/pitagentai)
+- **GitHub**: [@pitagentsai](https://github.com/pitagentsai)
 
 ## 🎉 Acknowledgements
 
