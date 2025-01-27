@@ -1,122 +1,232 @@
-# pitagents
-# PITCOIN SDK 🚀
+# 🚀 Agent Framework
 
-Welcome to the **PITCOIN SDK**, a powerful framework for creating agents that generate and manage Programmable Intelligent Tokens (PITs) on a custom blockchain! 💡
+![PyPI Version](https://img.shields.io/pypi/v/pitagentsai)
+![GitHub stars](https://img.shields.io/github/stars/pitagentsai/pitagents?style=social)
+![Twitter Follow](https://img.shields.io/twitter/follow/yourtwitterhandle?style=social)
 
-## Features ✨
+A professional and scalable **Flask-based Agent Framework** with blockchain-like token management. This framework is designed to efficiently create and manage agents, handle token transactions securely, and ensure data integrity through a simple blockchain mechanism.
 
-- **Agent Management** 🕵️‍♂️: Create and manage agents, each with their own tokens.
-- **Programmable Intelligent Tokens** 🪙: Generate and track custom tokens.
-- **Custom Blockchain** 🔗: Secure, tamper-proof, and validated chain for storing transactions.
-- **RESTful API** 🌐: Easy-to-use API for integrating with other systems.
-- **Blockchain Validation** ✅: Ensure the integrity of your token transactions.
+## 🛠️ Features
 
-## Quick Start 🚀
+- **✨ Agent Management**: Easily create and manage agents.
+- **🔑 Token Management**: Add, retrieve, and manage tokens associated with agents.
+- **🔗 Blockchain Validation**: Ensure the integrity of token transactions using a simple blockchain mechanism.
+- **📦 Extensible Structure**: Organized codebase for easy maintenance and scalability.
+- **📊 RESTful API**: Comprehensive API endpoints for seamless integration.
+- **📚 SQLAlchemy ORM**: Robust database interactions with SQLite for development.
 
-### Prerequisites 📋
+## 🧩 Technologies Used
 
-- Python 3.8+
-- Flask (`pip install flask`)
+- **[Flask](https://flask.palletsprojects.com/)**: Web framework for Python.
+- **[Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/)**: ORM for database interactions.
+- **[SQLite](https://www.sqlite.org/index.html)**: Lightweight database for development purposes.
+- **[Python 3.8+](https://www.python.org/)**: Programming language.
 
-### Installation 🛠️
+## 📦 Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/pitcoin-sdk.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd pitcoin-sdk
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 1. Clone the Repository
 
-### Running the Application ▶️
+```bash
+git clone https://github.com/yourusername/agent-framework.git
+cd agent-framework
+```
 
-1. Start the Flask server:
-   ```bash
-   python pitcoin_sdk.py
-   ```
-2. Use tools like Postman or `curl` to interact with the API.
+### 2. Create a Virtual Environment
 
-## API Endpoints 📡
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
 
-### 1. Create an Agent 🕵️‍♂️
-**Endpoint**: `/create_agent`  
-**Method**: POST  
-**Payload**:
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the Application
+
+```bash
+python app.py
+```
+
+The application will be available at `http://127.0.0.1:5000/`.
+
+## 📚 Usage
+
+Interact with the API using tools like `curl`, [Postman](https://www.postman.com/), or any HTTP client of your choice.
+
+### 🧑‍🤝‍🧑 Agent Endpoints
+
+- **Create Agent**
+
+  ```http
+  POST /api/agents/create
+  ```
+
+  **Body:**
+
+  ```json
+  {
+    "agent_id": "agent_1"
+  }
+  ```
+
+- **Get All Agents**
+
+  ```http
+  GET /api/agents/
+  ```
+
+- **Get Agent Tokens**
+
+  ```http
+  GET /api/agents/<agent_id>/tokens
+  ```
+
+### 🔗 Blockchain Endpoints
+
+- **Add Token to Agent**
+
+  ```http
+  POST /api/blockchain/add_token
+  ```
+
+  **Body:**
+
+  ```json
+  {
+    "agent_id": "agent_1",
+    "token_data": "sample_token_data"
+  }
+  ```
+
+- **Validate Blockchain**
+
+  ```http
+  GET /api/blockchain/validate
+  ```
+
+## 📝 API Examples
+
+### 1. **Create an Agent**
+
+```bash
+curl -X POST http://127.0.0.1:5000/api/agents/create \
+-H "Content-Type: application/json" \
+-d '{"agent_id": "agent_1"}'
+```
+
+**Response:**
+
 ```json
 {
-    "agent_id": "unique_agent_id"
+  "message": "Agent agent_1 created successfully."
 }
 ```
-**Response**:
+
+### 2. **Add a Token**
+
+```bash
+curl -X POST http://127.0.0.1:5000/api/blockchain/add_token \
+-H "Content-Type: application/json" \
+-d '{"agent_id": "agent_1", "token_data": "token123"}'
+```
+
+**Response:**
+
 ```json
 {
-    "message": "Agent unique_agent_id created successfully."
+  "message": "Token added successfully.",
+  "block": {
+    "agent_id": "agent_1",
+    "token_data": "token123",
+    "previous_hash": null,
+    "hash": "e3b0c44298fc1c149afbf4c8996fb924..."
+  }
 }
 ```
 
-### 2. Add a Token 🪙
-**Endpoint**: `/add_token`  
-**Method**: POST  
-**Payload**:
+### 3. **Get Tokens for an Agent**
+
+```bash
+curl http://127.0.0.1:5000/api/agents/agent_1/tokens
+```
+
+**Response:**
+
 ```json
 {
-    "agent_id": "unique_agent_id",
-    "token_data": {
-        "amount": 100,
-        "purpose": "Utility token"
-    }
+  "tokens": [
+    "token123"
+  ]
 }
 ```
-**Response**:
+
+### 4. **Validate the Blockchain**
+
+```bash
+curl http://127.0.0.1:5000/api/blockchain/validate
+```
+
+**Response:**
+
 ```json
 {
-    "message": "Token added successfully.",
-    "block": { ... }
+  "is_valid": true
 }
 ```
 
-### 3. Get Tokens for an Agent 📜
-**Endpoint**: `/get_tokens/<agent_id>`  
-**Method**: GET  
-**Response**:
-```json
-[
-    {
-        "amount": 100,
-        "purpose": "Utility token"
-    }
-]
+## 📂 Project Structure
+
+```
+agent-framework/
+├── app.py
+├── config.py
+├── requirements.txt
+├── README.md
+├── models/
+│   ├── __init__.py
+│   ├── agent.py
+│   └── block.py
+├── services/
+│   ├── __init__.py
+│   ├── agent_service.py
+│   └── blockchain_service.py
+├── routes/
+│   ├── __init__.py
+│   ├── agent_routes.py
+│   └── blockchain_routes.py
+└── utils/
+    ├── __init__.py
+    └── hash_utils.py
 ```
 
-### 4. Validate the Blockchain 🔗
-**Endpoint**: `/validate`  
-**Method**: GET  
-**Response**:
-```json
-{
-    "is_valid": true
-}
-```
+## 🧑‍💻 Contributing
 
-## Contributing 🤝
+Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-We welcome contributions! Feel free to fork the project, make your changes, and submit a pull request. 🌟
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/YourFeature`)
+3. Commit your Changes (`git commit -m 'Add some feature'`)
+4. Push to the Branch (`git push origin feature/YourFeature`)
+5. Open a Pull Request
 
-## License 📄
+## 📄 License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the [MIT License](LICENSE).
 
-## Contact 📧
+## 📞 Contact
 
-For questions or feedback, reach out at (pitagentsdev@gmail.com).
+- **Twitter**: [@yourtwitterhandle](https://twitter.com/yourtwitterhandle)
+- **GitHub**: [yourusername](https://github.com/yourusername)
+
+## 🎉 Acknowledgements
+
+- Inspired by the need for scalable agent and token management systems.
+- Built with love using Flask and SQLAlchemy.
 
 ---
 
-Thank you for using PITCOIN SDK! 💙
-
-
+✨ *Happy Coding!* ✨
+```
