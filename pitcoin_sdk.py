@@ -7,6 +7,7 @@ app = Flask(__name__)
 agents = {}
 blockchain = []
 
+
 # Simple function to simulate blockchain validation
 def validate_blockchain():
     for i in range(1, len(blockchain)):
