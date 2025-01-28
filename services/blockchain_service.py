@@ -1,6 +1,6 @@
 from models.block import Block
 from models.agent import Agent
-from app import db
+from extensions import db
 from utils.hash_utils import generate_hash
 
 class BlockchainService:
@@ -16,7 +16,7 @@ class BlockchainService:
         new_block = Block(agent_id=agent_id, token_data=token_data, previous_hash=previous_hash)
         db.session.add(new_block)
         db.session.commit()
-
+        print(new_block.to_dict())
         return {"message": "Token added successfully.", "block": new_block.to_dict()}, 201
 
     @staticmethod

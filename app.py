@@ -1,10 +1,8 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from routes.agent_routes import agent_bp
 from routes.blockchain_routes import blockchain_bp
 from config import Config
-
-db = SQLAlchemy()
+from extensions import db  # Import db from extensions.py
 
 def create_app():
     app = Flask(__name__)

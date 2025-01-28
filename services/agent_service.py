@@ -1,5 +1,5 @@
 from models.agent import Agent
-from app import db
+from extensions import db
 
 class AgentService:
     @staticmethod

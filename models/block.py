@@ -1,5 +1,7 @@
-from app import db
+# models/block.py
+from extensions import db
 from utils.hash_utils import generate_hash
+import json
 
 class Block(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -10,7 +12,7 @@ class Block(db.Model):
 
     def __init__(self, agent_id, token_data, previous_hash=None):
         self.agent_id = agent_id
-        self.token_data = token_data
+        self.token_data = json.dumps(token_data)  # Serialize token_data to JSON string
         self.previous_hash = previous_hash
         self.hash = self.compute_hash()
 
@@ -21,7 +23,8 @@ class Block(db.Model):
     def to_dict(self):
         return {
             'agent_id': self.agent_id,
-            'token_data': self.token_data,
+            'token_data': json.loads(self.token_data),  # Deserialize token_data from JSON string
             'previous_hash': self.previous_hash,
-            'hash': self.hash
+            'hash': self.hash,
+            'id': self.id,
         }
