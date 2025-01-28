@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pitagentsai',
-    version='0.1.0',
+    version='1.1.0',
     description='A professional and scalable Flask-based Agent Framework with blockchain-like token management.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
